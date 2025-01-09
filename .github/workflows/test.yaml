@@ -13,6 +13,8 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: 9
+      - name: Move unittest directory
+        run: cd unittest
       - name: Install dependencies
         run: pnpm install
       - name: Jest unit test

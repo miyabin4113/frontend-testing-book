@@ -1,0 +1,23 @@
+name: Test E2E
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - name: Move nextjs directory
+        run: cd nextjs
+      - name: Install dependencies
+        run: pnpm i
+      - name: Docker Compose Build
+        run: pnpm run docker:e2e:build
+      - name: Docker Compose Up As E2E Testing
+        run: pnpm run docker:e2e:ci
