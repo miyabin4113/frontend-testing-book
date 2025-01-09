@@ -1,6 +1,9 @@
 name: Test UI
 
-on: push
+on:
+  push:
+    paths:
+      - "nextjs/**"
 env:
   REG_NOTIFY_CLIENT_ID: ${{ secrets.REG_NOTIFY_CLIENT_ID }}
   AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
@@ -31,6 +34,9 @@ jobs:
   check:
     needs: install
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./nextjs
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -52,6 +58,9 @@ jobs:
   unit-test:
     needs: install
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./nextjs
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -71,6 +80,9 @@ jobs:
   build-storybook:
     needs: install
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./nextjs
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -97,6 +109,9 @@ jobs:
   test-storybook:
     needs: build-storybook
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./nextjs
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -124,6 +139,9 @@ jobs:
   vrt-storybook:
     needs: build-storybook
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./nextjs
     steps:
       - uses: actions/checkout@v3
         with:
