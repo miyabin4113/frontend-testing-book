@@ -5,6 +5,9 @@ on: push
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./unittest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -13,9 +16,7 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: 9
-      - name: Move unittest directory
-        run: cd unittest
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm i
       - name: Jest unit test
         run: pnpm test
