@@ -4,13 +4,13 @@ on:
   push:
     paths:
       - "unittest/**"
+defaults:
+  run:
+    working-directory: unittest
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./unittest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3

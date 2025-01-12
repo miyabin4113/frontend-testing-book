@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - "nextjs/**"
+defaults:
+  run:
+    working-directory: nextjs
 
 jobs:
   build:
